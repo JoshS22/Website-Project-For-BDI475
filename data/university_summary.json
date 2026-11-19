@@ -1,0 +1,279 @@
+{
+  "source": "data/college_town_home_sales.csv",
+  "rules": {
+    "sales": "Every row for the university.",
+    "median_sale_price": "Median of sales of $10,000 or more. Sales under $10,000 are left out of this figure only.",
+    "median_days_on_market": "Median of contract_date minus list_date, in days, on rows with both dates. Blank dates are not treated as zero. Rows with one date are left out of this figure only."
+  },
+  "min_sale_price": 10000,
+  "highlight": "University of Illinois Urbana-Champaign",
+  "rows_in_source": 35442,
+  "rows_with_both_dates": 28042,
+  "universities": [
+    {
+      "university": "University of Wisconsin-Madison",
+      "sales": 5706,
+      "sales_priced": 5706,
+      "median_sale_price": 434010,
+      "rows_with_both_dates": 4628,
+      "median_days_on_market": 7,
+      "highlight": false,
+      "cities": [
+        {
+          "city": "Madison",
+          "sales": 5061,
+          "sales_priced": 5061,
+          "median_sale_price": 421000,
+          "rows_with_both_dates": 4068,
+          "median_days_on_market": 7
+        },
+        {
+          "city": "Middleton",
+          "sales": 645,
+          "sales_priced": 645,
+          "median_sale_price": 611000,
+          "rows_with_both_dates": 560,
+          "median_days_on_market": 8
+        }
+      ]
+    },
+    {
+      "university": "University of Florida",
+      "sales": 5629,
+      "sales_priced": 5621,
+      "median_sale_price": 355000,
+      "rows_with_both_dates": 4505,
+      "median_days_on_market": 25,
+      "highlight": false,
+      "cities": [
+        {
+          "city": "Gainesville",
+          "sales": 5477,
+          "sales_priced": 5469,
+          "median_sale_price": 350000,
+          "rows_with_both_dates": 4372,
+          "median_days_on_market": 25
+        },
+        {
+          "city": "Newberry",
+          "sales": 152,
+          "sales_priced": 152,
+          "median_sale_price": 439995,
+          "rows_with_both_dates": 133,
+          "median_days_on_market": 87
+        }
+      ]
+    },
+    {
+      "university": "Purdue University",
+      "sales": 4616,
+      "sales_priced": 4612,
+      "median_sale_price": 299900,
+      "rows_with_both_dates": 3897,
+      "median_days_on_market": 10,
+      "highlight": false,
+      "cities": [
+        {
+          "city": "Lafayette",
+          "sales": 3057,
+          "sales_priced": 3053,
+          "median_sale_price": 260000,
+          "rows_with_both_dates": 2604,
+          "median_days_on_market": 9
+        },
+        {
+          "city": "West Lafayette",
+          "sales": 1559,
+          "sales_priced": 1559,
+          "median_sale_price": 379900,
+          "rows_with_both_dates": 1293,
+          "median_days_on_market": 11
+        }
+      ]
+    },
+    {
+      "university": "University of Illinois Urbana-Champaign",
+      "sales": 3664,
+      "sales_priced": 3663,
+      "median_sale_price": 245000,
+      "rows_with_both_dates": 2868,
+      "median_days_on_market": 7,
+      "highlight": true,
+      "cities": [
+        {
+          "city": "Champaign",
+          "sales": 2286,
+          "sales_priced": 2285,
+          "median_sale_price": 240000,
+          "rows_with_both_dates": 1784,
+          "median_days_on_market": 7
+        },
+        {
+          "city": "Urbana",
+          "sales": 1131,
+          "sales_priced": 1131,
+          "median_sale_price": 229900,
+          "rows_with_both_dates": 872,
+          "median_days_on_market": 8
+        },
+        {
+          "city": "Savoy",
+          "sales": 247,
+          "sales_priced": 247,
+          "median_sale_price": 402700,
+          "rows_with_both_dates": 212,
+          "median_days_on_market": 10.5
+        }
+      ]
+    },
+    {
+      "university": "University of Michigan",
+      "sales": 3021,
+      "sales_priced": 3009,
+      "median_sale_price": 572000,
+      "rows_with_both_dates": 2450,
+      "median_days_on_market": 7,
+      "highlight": false,
+      "cities": [
+        {
+          "city": "Ann Arbor",
+          "sales": 3021,
+          "sales_priced": 3009,
+          "median_sale_price": 572000,
+          "rows_with_both_dates": 2450,
+          "median_days_on_market": 7
+        }
+      ]
+    },
+    {
+      "university": "The University of North Carolina at Chapel Hill",
+      "sales": 3016,
+      "sales_priced": 3010,
+      "median_sale_price": 725000,
+      "rows_with_both_dates": 2411,
+      "median_days_on_market": 10,
+      "highlight": false,
+      "cities": [
+        {
+          "city": "Chapel Hill",
+          "sales": 2716,
+          "sales_priced": 2713,
+          "median_sale_price": 735000,
+          "rows_with_both_dates": 2205,
+          "median_days_on_market": 10
+        },
+        {
+          "city": "Carrboro",
+          "sales": 208,
+          "sales_priced": 205,
+          "median_sale_price": 605000,
+          "rows_with_both_dates": 149,
+          "median_days_on_market": 7
+        },
+        {
+          "city": "Pittsboro",
+          "sales": 92,
+          "sales_priced": 92,
+          "median_sale_price": 876986,
+          "rows_with_both_dates": 57,
+          "median_days_on_market": 38
+        }
+      ]
+    },
+    {
+      "university": "University of Georgia",
+      "sales": 2814,
+      "sales_priced": 2809,
+      "median_sale_price": 370000,
+      "rows_with_both_dates": 2279,
+      "median_days_on_market": 27,
+      "highlight": false,
+      "cities": [
+        {
+          "city": "Athens",
+          "sales": 2814,
+          "sales_priced": 2809,
+          "median_sale_price": 370000,
+          "rows_with_both_dates": 2279,
+          "median_days_on_market": 27
+        }
+      ]
+    },
+    {
+      "university": "University of Virginia",
+      "sales": 2775,
+      "sales_priced": 2774,
+      "median_sale_price": 615000,
+      "rows_with_both_dates": 2056,
+      "median_days_on_market": 7,
+      "highlight": false,
+      "cities": [
+        {
+          "city": "Charlottesville",
+          "sales": 2775,
+          "sales_priced": 2774,
+          "median_sale_price": 615000,
+          "rows_with_both_dates": 2056,
+          "median_days_on_market": 7
+        }
+      ]
+    },
+    {
+      "university": "The University of Iowa",
+      "sales": 1909,
+      "sales_priced": 1909,
+      "median_sale_price": 342000,
+      "rows_with_both_dates": 1248,
+      "median_days_on_market": 23.5,
+      "highlight": false,
+      "cities": [
+        {
+          "city": "Iowa City",
+          "sales": 1909,
+          "sales_priced": 1909,
+          "median_sale_price": 342000,
+          "rows_with_both_dates": 1248,
+          "median_days_on_market": 23.5
+        }
+      ]
+    },
+    {
+      "university": "The Pennsylvania State University",
+      "sales": 1351,
+      "sales_priced": 1348,
+      "median_sale_price": 430000,
+      "rows_with_both_dates": 908,
+      "median_days_on_market": 8,
+      "highlight": false,
+      "cities": [
+        {
+          "city": "State College",
+          "sales": 1351,
+          "sales_priced": 1348,
+          "median_sale_price": 430000,
+          "rows_with_both_dates": 908,
+          "median_days_on_market": 8
+        }
+      ]
+    },
+    {
+      "university": "University of California, Davis",
+      "sales": 941,
+      "sales_priced": 941,
+      "median_sale_price": 889000,
+      "rows_with_both_dates": 792,
+      "median_days_on_market": 11,
+      "highlight": false,
+      "cities": [
+        {
+          "city": "Davis",
+          "sales": 941,
+          "sales_priced": 941,
+          "median_sale_price": 889000,
+          "rows_with_both_dates": 792,
+          "median_days_on_market": 11
+        }
+      ]
+    }
+  ]
+}
