@@ -12,6 +12,7 @@ Run from anywhere:
 import csv
 import json
 import statistics
+from decimal import Decimal, ROUND_HALF_UP
 from pathlib import Path
 
 MIN_SALE_PRICE = 10_000
@@ -19,6 +20,11 @@ MIN_SALE_PRICE = 10_000
 ROOT = Path(__file__).resolve().parent.parent
 SOURCE = ROOT / "data" / "college_town_home_sales.csv"
 OUTPUT = ROOT / "data" / "city_median_sale_price.json"
+
+
+def whole_dollars(amount):
+    """Round half up to a whole number of dollars. A median of two sales can end in .5."""
+    return int(Decimal(str(amount)).quantize(Decimal("1"), rounding=ROUND_HALF_UP))
 
 
 def main():
@@ -46,7 +52,7 @@ def main():
             "state": state,
             "label": f"{city}, {state}",
             "sales": len(prices),
-            "median_sale_price": statistics.median(prices),
+            "median_sale_price": whole_dollars(statistics.median(prices)),
         })
     cities.sort(key=lambda c: c["median_sale_price"], reverse=True)
 

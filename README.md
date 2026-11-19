@@ -38,6 +38,20 @@ https://your-username.github.io/your-repo-name/
 
 _Replace this line. Say which rows you left out and why, and how each figure on the site is defined. "Five things that will bite you" in the description sheet lists the problems to cover._
 
+## Rerunning the scripts
+
+The site reads two JSON files made from the CSV. To remake them, run these from the repository root (the scripts find the files by their own location, so the folder you run them from doesn't matter):
+
+```bash
+python3 scripts/make_site_summary.py
+python3 scripts/make_city_median_prices.py
+```
+
+- `scripts/make_site_summary.py` writes `data/site_summary.json`: the summary cards at the top of the page.
+- `scripts/make_city_median_prices.py` writes `data/city_median_sale_price.json`: the median sale price chart.
+
+Both use only Python's standard library. Both leave out sales under $10,000, and store prices in whole dollars (halves round up). Running them again on the same CSV gives the same files. The dataset files are never changed.
+
 ## Tools we used
 
 _Replace this line with your AI coding agent or agents, and any libraries and other tools you used._
