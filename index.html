@@ -1,10 +1,9 @@
 <!DOCTYPE html>
-<!-- A placeholder from the Home Sales template. Replace this file with your site's first page. -->
 <html lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Under construction</title>
+  <title>College-Town Home Sales</title>
   <!-- An empty icon, so the browser doesn't log an error looking for favicon.ico -->
   <link rel="icon" href="data:,">
   <style>
@@ -89,12 +88,38 @@
     .gridlines { position: absolute; inset: 0; pointer-events: none; }
     .gridlines i { position: absolute; top: 0; bottom: 0; width: 1px; background: var(--gridline); }
     .chart-status { font-size: 0.875rem; color: var(--text-secondary); margin: 0 0 0.5rem; }
+
+    .summary-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(7.5rem, 1fr));
+      gap: 0.75rem;
+      margin: 1.5rem 0 0.5rem;
+    }
+    .summary-card {
+      border: 1px solid var(--gridline);
+      border-radius: 6px;
+      padding: 0.75rem;
+    }
+    .summary-card .card-value { display: block; font-size: 1.375rem; font-weight: 600; font-variant-numeric: tabular-nums; }
+    .summary-card .card-label { display: block; font-size: 0.8125rem; color: var(--text-secondary); }
+    .rule-note { font-size: 0.875rem; color: var(--text-secondary); margin: 0.5rem 0 0; }
   </style>
 </head>
 <body>
   <main>
-    <h1>This site is under construction</h1>
-    <p>It will show findings from the College-town home sales dataset.</p>
+    <h1>College-Town Home Sales</h1>
+    <p>
+      Completed home sales around college campuses across the United States, from public property
+      listings collected in March 2026. Every figure below is computed from the dataset.
+    </p>
+
+    <section aria-labelledby="summary-title">
+      <h2 class="chart-title" id="summary-title">The dataset at a glance</h2>
+      <div class="summary-cards" id="summary-cards">
+        <p class="chart-status" id="summary-status" role="status">Loading the summary…</p>
+      </div>
+      <p class="rule-note" id="summary-rule">Rule: sales under $10,000 are left out of every figure on this page. Prices are rounded to whole dollars.</p>
+    </section>
 
     <section aria-labelledby="median-price-title">
       <h2 class="chart-title" id="median-price-title">Median sale price by city</h2>
@@ -115,6 +140,35 @@
   </footer>
 
   <script>
+    (function () {
+      var DATA_URL = "data/site_summary.json";
+      var money = new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 });
+      var count = new Intl.NumberFormat("en-US");
+      var cards = document.getElementById("summary-cards");
+
+      function card(value, label) {
+        return '<div class="summary-card"><span class="card-value">' + value +
+          '</span><span class="card-label">' + label + "</span></div>";
+      }
+
+      fetch(DATA_URL)
+        .then(function (r) {
+          if (!r.ok) throw new Error("HTTP " + r.status);
+          return r.json();
+        })
+        .then(function (s) {
+          cards.innerHTML =
+            card(count.format(s.total_sales), "sales of $10,000 or more") +
+            card(count.format(s.cities), "cities and towns") +
+            card(count.format(s.states), "states") +
+            card(count.format(s.universities), "universities") +
+            card(money.format(Math.round(s.median_sale_price)), "median sale price");
+        })
+        .catch(function () {
+          cards.innerHTML = '<p class="chart-status">The summary could not be loaded. Open data/site_summary.json to see the figures.</p>';
+        });
+    })();
+
     (function () {
       var DATA_URL = "data/city_median_sale_price.json";
       var AXIS_MAX = 1000000;

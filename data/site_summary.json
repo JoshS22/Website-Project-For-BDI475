@@ -1,0 +1,12 @@
+{
+  "source": "data/college_town_home_sales.csv",
+  "rule": "Sales under $10,000 are left out of every figure.",
+  "min_sale_price": 10000,
+  "rows_in_source": 35442,
+  "rows_excluded": 40,
+  "total_sales": 35402,
+  "cities": 18,
+  "states": 11,
+  "universities": 11,
+  "median_sale_price": 410000
+}
