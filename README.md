@@ -40,7 +40,7 @@ _Replace this line. Say which rows you left out and why, and how each figure on 
 
 ## Tools we used
 
-_Replace this line with your AI coding agent or agents, and any libraries and other tools you used._
+_Claud Code_
 
 ## Citation
 
