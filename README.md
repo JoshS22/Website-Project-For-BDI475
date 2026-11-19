@@ -45,12 +45,14 @@ The site reads two JSON files made from the CSV. To remake them, run these from 
 ```bash
 python3 scripts/make_site_summary.py
 python3 scripts/make_city_median_prices.py
+python3 scripts/make_university_summary.py
 ```
 
 - `scripts/make_site_summary.py` writes `data/site_summary.json`: the summary cards at the top of the page.
 - `scripts/make_city_median_prices.py` writes `data/city_median_sale_price.json`: the median sale price chart.
+- `scripts/make_university_summary.py` writes `data/university_summary.json`: the University of Illinois area table. For each university it gives every sale, the median sale price (sales of $10,000 or more), and the median days on market (contract date minus list date, on rows with both dates).
 
-Both use only Python's standard library. Both leave out sales under $10,000, and store prices in whole dollars (halves round up). Running them again on the same CSV gives the same files. The dataset files are never changed.
+All three use only Python's standard library. The first two leave out sales under $10,000 and store prices in whole dollars (halves round up). Running them again on the same CSV gives the same files. The dataset files are never changed.
 
 ## Tools we used
 
