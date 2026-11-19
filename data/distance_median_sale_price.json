@@ -1,0 +1,47 @@
+{
+  "source": "data/college_town_home_sales.csv",
+  "rule": "Sales of $10,000 or more. Sales under $10,000 are left out. Each band includes its lower distance and excludes its upper one.",
+  "min_sale_price": 10000,
+  "distance_field": "miles_to_campus",
+  "rows_in_source": 35442,
+  "rows_used": 35402,
+  "rows_under_min_price": 40,
+  "rows_without_distance": 0,
+  "bands": [
+    {
+      "label": "Under 1 mile",
+      "from_miles": 0.0,
+      "to_miles": 1.0,
+      "sales": 1491,
+      "median_sale_price": 480000
+    },
+    {
+      "label": "1 to 3 miles",
+      "from_miles": 1.0,
+      "to_miles": 3.0,
+      "sales": 12888,
+      "median_sale_price": 400000
+    },
+    {
+      "label": "3 to 5 miles",
+      "from_miles": 3.0,
+      "to_miles": 5.0,
+      "sales": 11217,
+      "median_sale_price": 375000
+    },
+    {
+      "label": "5 to 10 miles",
+      "from_miles": 5.0,
+      "to_miles": 10.0,
+      "sales": 9561,
+      "median_sale_price": 442650
+    },
+    {
+      "label": "10 miles or more",
+      "from_miles": 10.0,
+      "to_miles": null,
+      "sales": 245,
+      "median_sale_price": 575000
+    }
+  ]
+}

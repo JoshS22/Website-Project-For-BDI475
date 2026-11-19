@@ -46,13 +46,15 @@ The site reads two JSON files made from the CSV. To remake them, run these from 
 python3 scripts/make_site_summary.py
 python3 scripts/make_city_median_prices.py
 python3 scripts/make_university_summary.py
+python3 scripts/make_distance_median_prices.py
 ```
 
 - `scripts/make_site_summary.py` writes `data/site_summary.json`: the summary cards at the top of the page.
 - `scripts/make_city_median_prices.py` writes `data/city_median_sale_price.json`: the median sale price chart.
 - `scripts/make_university_summary.py` writes `data/university_summary.json`: the University of Illinois area table. For each university it gives every sale, the median sale price (sales of $10,000 or more), and the median days on market (contract date minus list date, on rows with both dates).
+- `scripts/make_distance_median_prices.py` writes `data/distance_median_sale_price.json`: the median sale price by distance to campus. Five bands of `miles_to_campus` (under 1, 1 to 3, 3 to 5, 5 to 10, and 10 or more miles), with the number of sales in each. Sales under $10,000 are left out, and a band includes its lower distance.
 
-All three use only Python's standard library. The first two leave out sales under $10,000 and store prices in whole dollars (halves round up). Running them again on the same CSV gives the same files. The dataset files are never changed.
+All four use only Python's standard library. The first two and the distance script leave out sales under $10,000 and store prices in whole dollars (halves round up). Running them again on the same CSV gives the same files. The dataset files are never changed.
 
 ## Tools we used
 
