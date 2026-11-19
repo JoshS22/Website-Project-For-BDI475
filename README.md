@@ -1,46 +1,58 @@
-# [Your site's title]
-
-## Start here (delete this section before you submit)
-
-This repository is your starting point for the Home Sales case. It already holds the dataset, its description sheet, project instructions for your AI coding agent, and outlines of the README and agent log that the case asks for.
-
-1. **Turn on GitHub Pages.** In this repository, open **Settings**, then **Pages**. Under "Build and deployment," set **Source** to **GitHub Actions**. GitHub may suggest workflows to add. Skip them: this repository already has one, `.github/workflows/pages.yml`.
-2. **Publish for the first time.** Open the **Actions** tab, choose **Publish site to GitHub Pages** in the sidebar, click **Run workflow**, then click **Run workflow** again to confirm. If the tab already shows a failed run from when you created the repository, that's expected: Pages wasn't turned on yet. When the new run shows a green check, your site is at `https://your-username.github.io/your-repo-name/`. It shows a placeholder page until you replace `index.html`.
-
-    From then on, every push to the main branch publishes the site within a few minutes. If the live site doesn't show a change, open the **Actions** tab. A red X means the publish failed, and the run's log says why.
-3. **Open the repository in your AI coding agent.** Its project instructions are in `AGENTS.md`. If your agent reads its instructions from a file with a different name, check its documentation and copy `AGENTS.md` to that name. Add to the instructions as you learn what your agent needs.
-4. **Read `docs/data_description_sheet.md`** before you ask the agent for any analysis.
-5. **Build in small steps,** as the setup guide describes. Add an entry to `AGENT_LOG.md` each time you work with the agent.
-6. **Fill in every section below** before you submit.
-
-| Path | What it is |
-|---|---|
-| `index.html` | A placeholder page. Replace it with your site. |
-| `data/college_town_home_sales.csv` | The dataset, version 1.0: 35,442 rows. Your site reads this file. |
-| `data/college_town_home_sales.xlsx`, `.sqlite`, `.duckdb`, `.parquet` | The same data in Excel, SQLite, DuckDB and Parquet formats, with identical values |
-| `docs/data_description_sheet.md` | What every column means, and five problems in the data |
-| `AGENTS.md` | Project instructions for your AI coding agent |
-| `AGENT_LOG.md` | Your agent log |
-| `scripts/` | Scripts that make smaller data files for the site |
-| `.github/workflows/pages.yml` | Publishes the site to GitHub Pages each time you push to main. It publishes your files as they are. If you switch to a framework that needs a build step, have your agent update it. |
-
-Don't edit any of the five dataset files. Your site needs only the CSV file. The other formats make it easier to check numbers a second way, for example with a pivot table in Excel or a SQL query on the SQLite file. In SQLite and DuckDB, the table is named `home_sales`.
+# College-Town Home Sales
 
 ## What this site is for
 
-_Replace this line with your site's question and audience, or a short description of the site._
+This site shows what homes sold for near 11 US universities. It uses one dataset of 35,442 completed home sales in 18 college towns, collected in March 2026. It answers three questions: how median sale prices compare across the towns, how the median changes with distance from campus, and how the University of Illinois area (Champaign, Urbana and Savoy) compares with the other 10 campus areas. It is for anyone curious about college-town housing, such as buyers, sellers and students of housing markets. It does not give advice about any particular home.
 
 ## Live site
 
-https://your-username.github.io/your-repo-name/
+https://joshs22.github.io/Website-Project-For-BDI475/
+
+## What is in this repository
+
+| Path | What it is |
+|---|---|
+| `index.html` | The site: one page, with its charts and tables drawn from the JSON files in `data/` |
+| `data/college_town_home_sales.csv` | The dataset, version 1.0: 35,442 rows. The scripts read this file. |
+| `data/college_town_home_sales.xlsx`, `.sqlite`, `.duckdb`, `.parquet` | The same data in Excel, SQLite, DuckDB and Parquet formats, with identical values |
+| `data/site_summary.json`, `city_median_sale_price.json`, `distance_median_sale_price.json`, `university_summary.json` | The four files the site reads. Scripts make them from the CSV. |
+| `docs/data_description_sheet.md` | What every column means, and five problems in the data |
+| `scripts/` | The four scripts that make the JSON files |
+| `AGENTS.md` | Project instructions for the AI coding agent |
+| `AGENT_LOG.md` | The log of work with the AI coding agent |
+| `.github/workflows/pages.yml` | Publishes the repository's files to GitHub Pages each time main is pushed. Nothing is built. |
+
+Nothing in the five dataset files has been changed. The site uses only the CSV, through the JSON files made from it.
 
 ## Data notes
 
-_Replace this line. Say which rows you left out and why, and how each figure on the site is defined. "Five things that will bite you" in the description sheet lists the problems to cover._
+The figures use the rows as collected. No rows were deduplicated, filled in or corrected. The only cleaning steps are the ones in the data description sheet.
+
+**Rows left out.** The dataset has 35,442 rows. The 40 sales under $10,000 are left out of every median sale price and every distance band. They are still counted in the university table's Sales column, which counts every row (35,442 in total). The summary card counts the 35,402 sales of $10,000 or more.
+
+**Median sale price.** The median of `sale_price` over sales of $10,000 or more, in whole dollars. A median of two sales can end in .5, and those round up. The site shows medians, not averages.
+
+**Median days on market.** `contract_date` minus `list_date`, in days, on the rows that have both dates: 28,042 of 35,442 (79.1%). A blank date is never counted as zero. The median is used, not the mean. This is listing to contract, the way listing sites count it. It is not `sale_date` minus `list_date`, which also includes the time to close.
+
+**Distance bands.** `miles_to_campus` is grouped into under 1 mile, 1 to 3 miles, 3 to 5 miles, 5 to 10 miles, and 10 miles or more. A band includes its lower distance and excludes its upper one, so a home exactly 3.0 miles away is in "3 to 5 miles". Every row has a distance.
+
+**University.** The `university` column, as assigned in the source from each home's coordinates. Champaign, Urbana and Savoy are in the University of Illinois Urbana-Champaign row.
+
+**The five problems in the data description sheet, and how the site handles them:**
+
+1. **Blank dates.** Days on market is computed only where both dates exist, and the page shows how many rows that is. Blanks are not treated as zero.
+2. **Repeated addresses.** Nothing is deduplicated. Each row is kept and keyed by `listing_id`, because 66 rows share an address with another row, and many are different apartments in one building.
+3. **Impossible prices.** Sales under $10,000 are left out of the median prices and the distance bands. Sales of any price are counted in the Sales column.
+4. **`home_type`.** Not used. It is not reliable.
+5. **Impossible values, such as zero living area, huge lots, 60 bathrooms, or a $1 billion tax bill.** Not used on the site.
+
+**Differences from the data description sheet.** The sheet's table of 14 college towns takes its medians from sales of $1,000 or more. This site uses $10,000. Thirteen of the 14 medians are the same under either rule. Ann Arbor, MI is $571,000 in the sheet and $572,000 on this site.
+
+**Values as reported.** The values come from one source as collected in March 2026. They were not checked against county records.
 
 ## Rerunning the scripts
 
-The site reads two JSON files made from the CSV. To remake them, run these from the repository root (the scripts find the files by their own location, so the folder you run them from doesn't matter):
+The site reads four JSON files made from the CSV. To remake them, run these from the repository root. The scripts find the files by their own location, so the folder you run them from does not matter.
 
 ```bash
 python3 scripts/make_site_summary.py
@@ -50,15 +62,15 @@ python3 scripts/make_distance_median_prices.py
 ```
 
 - `scripts/make_site_summary.py` writes `data/site_summary.json`: the summary cards at the top of the page.
-- `scripts/make_city_median_prices.py` writes `data/city_median_sale_price.json`: the median sale price chart.
-- `scripts/make_university_summary.py` writes `data/university_summary.json`: the University of Illinois area table. For each university it gives every sale, the median sale price (sales of $10,000 or more), and the median days on market (contract date minus list date, on rows with both dates).
-- `scripts/make_distance_median_prices.py` writes `data/distance_median_sale_price.json`: the median sale price by distance to campus. Five bands of `miles_to_campus` (under 1, 1 to 3, 3 to 5, 5 to 10, and 10 or more miles), with the number of sales in each. Sales under $10,000 are left out, and a band includes its lower distance.
+- `scripts/make_city_median_prices.py` writes `data/city_median_sale_price.json`: the median sale price by city chart.
+- `scripts/make_distance_median_prices.py` writes `data/distance_median_sale_price.json`: the median sale price by distance to campus.
+- `scripts/make_university_summary.py` writes `data/university_summary.json`: the table of 11 universities and the Champaign, Urbana and Savoy table.
 
-All four use only Python's standard library. The first two and the distance script leave out sales under $10,000 and store prices in whole dollars (halves round up). Running them again on the same CSV gives the same files. The dataset files are never changed.
+All four use only Python's standard library. Running them again on the same CSV gives the same files, and the dataset files are never changed.
 
 ## Tools we used
 
-_Claud Code_
+Claude Code, an AI coding agent. It wrote the scripts and the page under the rules in `AGENTS.md`. The figures were checked against the CSV and the SQLite file, and the page was checked in a headless browser at phone and desktop widths.
 
 ## Citation
 
@@ -66,4 +78,4 @@ College-town home sales dataset, version 1.0 (2026). University of Illinois-Delo
 
 ## Who did what
 
-_For teams: replace this line with each member's name and what they did. If you worked alone, delete this section._
+I worked alone. Claude Code wrote the code, and I set the rules in `AGENTS.md`, reviewed each change and checked the figures against the data.
