@@ -72,6 +72,8 @@ All four use only Python's standard library. Running them again on the same CSV 
 
 Claude Code, an AI coding agent. It wrote the scripts and the page under the rules in `AGENTS.md`. The figures were checked against the CSV and the SQLite file, and the page was checked in a headless browser at phone and desktop widths.
 
+Copilot was also used to monitor and fix pull requests if needed.
+
 ## Citation
 
 College-town home sales dataset, version 1.0 (2026). University of Illinois-Deloitte Foundation Center for Business Emerging Technologies. Data collected March 2026.
